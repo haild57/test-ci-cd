@@ -9,7 +9,7 @@ Parameters:
     Description: The IP address of the workstation that can SSH into the instance.
   AMI:
     Type: String
-    Default: ami-08f3d892de259504d
+    Default: ami-02c3627b04781eada
     Description: The Linux AMI to use.
   Key:
     Type: String
