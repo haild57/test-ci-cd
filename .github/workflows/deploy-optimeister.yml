@@ -61,7 +61,7 @@ jobs:
       - name: Copy File From S3
         run: |
           aws ssm send-command \
-          --instance-ids i-0b60cd056a13b3258 \
+          --instance-ids i-047bb25f0a2034513 \
           --document-name "AWS-RunShellScript" \
           --comment "aws s3 ls" \
           --parameters commands=ifconfig
