@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Build Optimeister
 
 # Controls when the workflow will run
 on:
@@ -34,21 +34,15 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ github.event.inputs.region}}
+          aws-region: ap-northeast-1
 
-      - name: Deploy Amazon EKS Cluster
+      - name: Deploy Cloud Formation Stack
         id: eks-cluster
         uses: aws-actions/aws-cloudformation-github-deploy@master
         with:
-          name: ${{ steps.env-name.outputs.environment }}-cluster
-          template: https://s3.amazonaws.com/aws-quickstart/quickstart-amazon-eks/templates/amazon-eks-master.template.yaml
+          name: hai-test-ci-cd
+          template: ../../base-cfn.yml
           no-fail-on-empty-changeset: "1"
           parameter-overrides: >-
-            AvailabilityZones=${{ github.event.inputs.region }}a,
-            AvailabilityZones=${{ github.event.inputs.region }}c,
-            KeyPairName=${{ github.event.inputs.keypair }},
-            NumberOfAZs=2,
-            ProvisionBastionHost=Disabled,
-            EKSPublicAccessEndpoint=Enabled,
-            EKSPrivateAccessEndpoint=Enabled,
-            RemoteAccessCIDR=0.0.0.0/0
+            Key=hai-test-ci-cd,
+            WorkstationIp=211.7.72.106
