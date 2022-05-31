@@ -119,6 +119,7 @@ Resources:
     Properties:
       SubnetId: !Ref SubnetA
       ImageId: !Ref AMI
+      IamInstanceProfile: !Ref Ec2InstanceProfile
       InstanceType:
         Ref: InstanceTypeParameter
       KeyName: !Ref Key
@@ -161,6 +162,28 @@ Resources:
           #cloud-boothook
           #!/bin/bash
           echo "Hello World!"
+  Ec2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles: [ !Ref Ec2InstanceRole ]
+  Ec2InstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns:
+        # ********** This is really the only adjustment we need to make to enable use of SSM Session Manager
+        #            All the AWS::CloudFormation::Init and cloud init script work is setting up cloudwatch logs
+        #            to give visibility to the SSM Agent actions.
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [ ec2.amazonaws.com ]
+            Action:
+              - sts:AssumeRole
+      Path: /
+
 Outputs:
   PublicIp:
     Value:
