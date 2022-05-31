@@ -64,6 +64,18 @@ jobs:
           --document-name "AWS-RunShellScript" \
           --comment "aws s3 ls" \
           --parameters commands=ifconfig
+          
+  installAppAndStartService:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Install App
+          run: |
+            echo 'install app'
+        - name: Install App
+          run: |
+            echo 'start services'
+            
+          
       
   
     
