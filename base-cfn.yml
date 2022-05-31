@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   InstanceTypeParameter:
     Type: String
-    Default: t3a.medium
+    Default: t2.micro
     Description: Enter instance size. Default is t3a.medium.
   WorkstationIp:
     Type: String
@@ -35,7 +35,7 @@ Resources:
   SubnetA:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: us-east-1a
+      AvailabilityZone: ap-northeast-1a
       VpcId: !Ref VPC
       CidrBlock: 10.0.0.0/24
       MapPublicIpOnLaunch: true
