@@ -46,3 +46,29 @@ jobs:
           parameter-overrides: >-
             Key=hai-test-ci-cd,
             WorkstationIp=211.7.72.106
+            
+  copyFileFromS3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+      - name: Copy File From S3
+        run: |
+          aws ssm send-command \
+          --instance-ids i-0b60cd056a13b3258 \
+          --document-name "AWS-RunShellScript" \
+          --comment "aws s3 ls" \
+          --parameters commands=ifconfig
+      
+  
+    
+            
+            
+            
+            
+            
