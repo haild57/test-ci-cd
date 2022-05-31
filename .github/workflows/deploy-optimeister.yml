@@ -38,10 +38,10 @@ jobs:
 
       - name: Deploy Cloud Formation Stack
         id: eks-cluster
-        uses: aws-actions/aws-cloudformation-github-deploy@master
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: hai-test-ci-cd
-          template: ../../base-cfn.yml
+          template: base-cfn.yml
           no-fail-on-empty-changeset: "1"
           parameter-overrides: >-
             Key=hai-test-ci-cd,
