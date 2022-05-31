@@ -175,13 +175,14 @@ Resources:
         #            All the AWS::CloudFormation::Init and cloud init script work is setting up cloudwatch logs
         #            to give visibility to the SSM Agent actions.
         - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
-      - PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-            - Effect: Allow
-              Action: 
-                - s3:*
-              Resource: "*"
+      Policies:
+        - PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+              - Effect: Allow
+                Action: 
+                  - s3:*
+                Resource: "*"
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
