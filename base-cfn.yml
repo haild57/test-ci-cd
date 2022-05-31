@@ -183,6 +183,7 @@ Resources:
                 Action: 
                   - s3:*
                 Resource: "*"
+          PolicyName: S3Policyabcd
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
