@@ -18,34 +18,34 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Configure AWS credentials
-        id: creds
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
+#       # Runs a single command using the runners shell
+#       - name: Configure AWS credentials
+#         id: creds
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ap-northeast-1
 
-      - name: Deploy Cloud Formation Stack
-        id: eks-cluster
-        uses: aws-actions/aws-cloudformation-github-deploy@v1
-        with:
-          name: hai-test-ci-cd
-          template: base-cfn.yml
-          no-fail-on-empty-changeset: "1"
-          parameter-overrides: >-
-            Key=hai-test-ci-cd,
-            WorkstationIp=211.7.72.106
+#       - name: Deploy Cloud Formation Stack
+#         id: eks-cluster
+#         uses: aws-actions/aws-cloudformation-github-deploy@v1
+#         with:
+#           name: hai-test-ci-cd
+#           template: base-cfn.yml
+#           no-fail-on-empty-changeset: "1"
+#           parameter-overrides: >-
+#             Key=hai-test-ci-cd,
+#             WorkstationIp=211.7.72.106
             
   copyFileFromS3:
     runs-on: ubuntu-latest
