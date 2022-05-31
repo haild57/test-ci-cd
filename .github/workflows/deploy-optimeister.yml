@@ -66,6 +66,7 @@ jobs:
           --parameters commands=ifconfig
           
   installAppAndStartService:
+      needs: copyFileFromS3
       runs-on: ubuntu-latest
       steps:
         - name: Install App
