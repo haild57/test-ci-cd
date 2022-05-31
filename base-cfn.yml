@@ -200,3 +200,6 @@ Outputs:
         - Linux
         - PublicIp
     Description: Server's PublicIp Address
+  InstanceId:
+    Value: 
+      Ref: Linux
